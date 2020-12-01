@@ -1,4 +1,6 @@
 <?php
+/*products*/
+
 /**
  * The template for displaying product content within loops
  *
@@ -24,7 +26,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
 ?>
-<li <?php wc_product_class( '', $product ); ?>>
+<li <?php wc_product_class( 'card animate card--scale-img stack__item', $product ); ?>>
 	<?php
 	/**
 	 * Hook: woocommerce_before_shop_loop_item.

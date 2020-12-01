@@ -320,7 +320,7 @@ function get_search_form( $args = array() ) {
 			$form = '<form role="search" ' . $aria_label . 'method="get" class="search-form" action="' . esc_url( home_url( '/' ) ) . '">
 				<label>
 					<span class="screen-reader-text">' . _x( 'Search for:', 'label' ) . '</span>
-					<input type="search" class="search-field" placeholder="' . esc_attr_x( 'Search &hellip;', 'placeholder' ) . '" value="' . get_search_query() . '" name="s" />
+					<input type="search" class="search-field" placeholder="Я ищу..." value="' . get_search_query() . '" name="s" />
 				</label>
 				<input type="submit" class="search-submit" value="' . esc_attr_x( 'Search', 'submit button' ) . '" />
 			</form>';
@@ -1020,7 +1020,6 @@ function get_custom_logo( $blog_id = 0 ) {
 	$custom_logo_id = get_theme_mod( 'custom_logo' );
 
 	// We have a logo. Logo is go.
-	if ( $custom_logo_id ) {
 		$custom_logo_attr = array(
 			'class'   => 'custom-logo',
 			'loading' => false,
@@ -1062,29 +1061,17 @@ function get_custom_logo( $blog_id = 0 ) {
 		 */
 		$image = wp_get_attachment_image( $custom_logo_id, 'full', false, $custom_logo_attr );
 
-		if ( $unlink_homepage_logo && is_front_page() && ! is_paged() ) {
-			// If on the home page, don't link the logo to home.
-			$html = sprintf(
-				'<span class="custom-logo-link">%1$s</span>',
-				$image
-			);
-		} else {
+
 			$aria_current = is_front_page() && ! is_paged() ? ' aria-current="page"' : '';
 
+
 			$html = sprintf(
-				'<a href="%1$s" class="custom-logo-link" rel="home"%2$s>%3$s</a>',
-				esc_url( home_url( '/' ) ),
-				$aria_current,
-				$image
-			);
-		}
-	} elseif ( is_customize_preview() ) {
-		// If no logo is set but we're in the Customizer, leave a placeholder (needed for the live preview).
-		$html = sprintf(
-			'<a href="%1$s" class="custom-logo-link" style="display:none;"><img class="custom-logo"/></a>',
-			esc_url( home_url( '/' ) )
-		);
-	}
+                '<a href="%1$s" class="custom-logo-link"><img class="custom-logo" src="./wp-content/uploads/2020/11/rsz_photo_2020-11-18_23-46-19.jpg" /><div class="logo-text" style="top: 1px;">КАФЕЛЬ-МАРКЕТ</div></a>',
+                esc_url( home_url( '/' ) ),
+                $image,
+                $aria_current
+            );
+
 
 	if ( $switched_blog ) {
 		restore_current_blog();

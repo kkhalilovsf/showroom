@@ -29,7 +29,7 @@ msgid "Error 404"
 msgstr ""
 
 #: 404.php:45 inc/customizer/features/feature-404-controls.php:101
-msgid "Back to home page"
+msgid "Вернуться на главную"
 msgstr ""
 
 #: archive.php:98 home.php:141

@@ -32993,7 +32993,7 @@ msgid "Qty"
 msgstr ""
 
 #: templates/loop/no-products-found.php:21
-msgid "No products were found matching your selection."
+msgid "Товаров, соответствующих вашему запросу, не обнаружено.."
 msgstr ""
 
 #: templates/loop/orderby.php:24
@@ -39458,7 +39458,7 @@ msgstr ""
 
 #: packages/woocommerce-blocks/assets/js/blocks/product-search/index.js:59
 #: packages/woocommerce-blocks/build/product-search.js:1
-msgid "Search products…"
+msgid "Я ищу…"
 msgstr ""
 
 #: packages/woocommerce-blocks/assets/js/blocks/product-tag/block.js:99
@@ -40558,7 +40558,7 @@ msgid "Showing Products by Category block preview."
 msgstr ""
 
 #: packages/woocommerce-blocks/build/product-category.js:1
-msgid "No products were found that matched your selection."
+msgid "Товаров, соответствующих вашему запросу, не обнаружено.."
 msgstr ""
 
 #: packages/woocommerce-blocks/build/product-category.js:1

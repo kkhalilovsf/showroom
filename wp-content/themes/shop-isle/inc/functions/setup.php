@@ -204,8 +204,8 @@ if ( ! function_exists( 'shop_isle_setup' ) ) :
 			'custom-header',
 			array(
 				'default-image' => get_template_directory_uri() . '/assets/images/header.jpg',
-				'width'         => 1200,
-				'height'        => 280,
+				'width'         => '',
+				'height'        => '',
 				'flex-height'   => true,
 			)
 		);
@@ -310,7 +310,7 @@ function shop_isle_widgets_init() {
  */
 function shop_isle_scripts() {
 
-	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/assets/bootstrap/css/bootstrap.min.css', array(), '20120208', 'all' );
+	wp_enqueue_style( 'bootstrap', get_template_directory_uri() . '/assets/bootstrap/css/bootstrap.css', array(), '20120208', 'all' );
 
 	wp_enqueue_style( 'magnific-popup', get_template_directory_uri() . '/assets/css/vendor/magnific-popup.min.css', array(), '20120208', 'all' );
 
@@ -320,7 +320,7 @@ function shop_isle_scripts() {
 
 	wp_enqueue_style( 'shop-isle-animate', get_template_directory_uri() . '/assets/css/vendor/animate.min.css', array( 'owl-carousel' ), '20120208', 'all' );
 
-	wp_enqueue_style( 'shop-isle-main-style', get_template_directory_uri() . '/assets/css/style.min.css', array( 'bootstrap' ), SI_VERSION, 'all' );
+	wp_enqueue_style( 'shop-isle-main-style', get_template_directory_uri() . '/assets/css/style.css', array( 'bootstrap' ), SI_VERSION, 'all' );
 
 	wp_enqueue_style( 'shop-isle-style', get_stylesheet_uri(), '', SI_VERSION );
 
@@ -349,7 +349,8 @@ function shop_isle_scripts() {
 
 	wp_enqueue_script(
 		'shop-isle-custom',
-		get_template_directory_uri() . '/assets/js/custom.min.js',
+		get_template_directory_uri() . '/assets/js/custom.js',
+		get_template_directory_uri() . 'https://pro.fontawesome.com/releases/v5.10.0/css/all.css',
 		array(
 			'jquery',
 			'flexslider',

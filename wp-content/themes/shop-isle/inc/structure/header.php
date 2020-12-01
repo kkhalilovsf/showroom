@@ -46,108 +46,85 @@ if ( ! function_exists( 'shop_isle_primary_navigation' ) ) {
 
 		?>
 		<!-- Navigation start -->
-		<nav class="navbar navbar-custom navbar-fixed-top <?php echo esc_attr( $navbar_class ); ?>" role="navigation">
 
-		<div class="container">
-		<div class="header-container">
+		<div class="wrapper">
+		<div class="header__content">
 
-		<div class="navbar-header">
 		<?php
 
-		echo '<div class="shop_isle_header_title"><div class="shop-isle-header-title-inner">';
-
+		echo '<div class="header__item shop_isle_header_title">';
+        echo '<div class="shop-isle-header-title-inner">';
 		// Logo selected
-		if ( has_custom_logo() ) {
+        the_custom_logo();
 
-			if ( function_exists( 'the_custom_logo' ) ) {
-				the_custom_logo();
-			}
-
-			if ( is_customize_preview() ) {
-				// Front page
-				if ( is_front_page() ) {
-					echo '<h1 class="site-title shop_isle_hidden_if_not_customizer"><a href="' . esc_url( home_url( '/' ) ) . '" title="' . esc_attr( get_bloginfo( 'name', 'display' ) ) . '" rel="home">' . get_bloginfo( 'name' ) . '</a></h1>';
-					// Other page
-				} else {
-					echo '<p class="site-title shop_isle_hidden_if_not_customizer"><a href="' . esc_url( home_url( '/' ) ) . '" title="' . esc_attr( get_bloginfo( 'name', 'display' ) ) . '" rel="home">' . get_bloginfo( 'name' ) . '</a></p>';
-				}
-			}
-
-			// Without logo
-		} else {
-			if ( is_customize_preview() ) {
-				echo ' <a href="' . esc_url( home_url( '/' ) ) . '" class="logo-image shop_isle_hidden_if_not_customizer"><img src=""></a>';
-			}
-
-			// Front page
-			if ( is_front_page() ) {
-				echo '<h1 class="site-title"><a href="' . esc_url( home_url( '/' ) ) . '" title="' . esc_attr( get_bloginfo( 'name', 'display' ) ) . '" rel="home">' . get_bloginfo( 'name' ) . '</a></h1>';
-				// Other page
-			} else {
-				echo '<p class="site-title"><a href="' . esc_url( home_url( '/' ) ) . '" title="' . esc_attr( get_bloginfo( 'name', 'display' ) ) . '" rel="home">' . get_bloginfo( 'name' ) . '</a></p>';
-			}
-
-			echo '<p class="site-description"><a href="' . esc_url( home_url( '/' ) ) . '" title="' . esc_attr( get_bloginfo( 'description', 'display' ) ) . '" rel="home">' . get_bloginfo( 'description' ) . '</a></p>';
-		}
-		echo '</div></div>';
+        echo '</div>';
+        echo '
+              <div class="info visible-xs">
+                  <div class="info__social">
+                      <a href="https://www.instagram.com/kafel_market_showroom/" target="_blank" class="info__social-link link-inverse"><i class="fab fa-instagram"></i></a>
+                      <a href="https://vk.com/kafel_market" target="_blank" class="info__social-link link-inverse"><i class="fab fa-vk"></i></a>
+                  </div>
+              </div>
+                      ';
+		echo '</div>';
 		?>
 
-						<div type="button" class="navbar-toggle" data-toggle="collapse" data-target="#custom-collapse">
-							<span class="sr-only"><?php _e( 'Toggle navigation', 'shop-isle' ); ?></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-							<span class="icon-bar"></span>
-						</div>
-					</div>
 
-					<div class="header-menu-wrap">
-						<div class="collapse navbar-collapse" id="custom-collapse">
 
-							<?php
+        <div class="header__item">
+            <div class="info">
+                <div class="info__contacts">
+                    <div class="info__contacts-item">
+                      <div class="subtitle info__subtitle">Опт:</div>
+                      <a href="tel:89787706417" class="info__tel">8 (978) 770-6417</a>
+                    </div>
 
-							wp_nav_menu(
-								array(
-									'theme_location' => 'primary',
-									'container'      => false,
-									'menu_class'     => 'nav navbar-nav navbar-right',
-								)
-							);
-							?>
+                    <div class="info__contacts-item">
+                      <div class="subtitle info__subtitle" for="retail">Розница:</div>
+                      <a href="tel:89797705923" id="retail" class="info__tel">8 (979) 770-5923</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="header__item hidden-xs">
+            <div class="info">
+                <div class="info__social">
+                    <a href="https://www.instagram.com/kafel_market_showroom/" target="_blank" class="info__social-link link-inverse"><i class="fab fa-instagram"></i></a>
+                    <a href="https://vk.com/kafel_market" target="_blank" class="info__social-link link-inverse"><i class="fab fa-vk"></i></a>
+                </div>
+            </div>
+        </div>
 
-						</div>
-					</div>
+        <?php
 
-					<?php if ( class_exists( 'WooCommerce', false ) ) : ?>
-						<div class="navbar-cart">
+        /*wp_nav_menu(
+            array(
+                'theme_location' => 'primary',
+                'container'      => false,
+                'menu_class'     => 'nav navbar-nav navbar-right',
+            )
+        );*/
+        ?>
 
-							<div class="header-search">
-								<div class="glyphicon glyphicon-search header-search-button"></div>
-								<div class="header-search-input">
-									<form role="search" method="get" class="woocommerce-product-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
-										<input type="search" class="search-field" placeholder="<?php echo esc_attr_x( 'Search Products&hellip;', 'placeholder', 'shop-isle' ); ?>" value="<?php echo get_search_query(); ?>" name="s" title="<?php echo esc_attr_x( 'Search for:', 'label', 'shop-isle' ); ?>" />
-										<input type="submit" value="<?php echo esc_attr_x( 'Search', 'submit button', 'shop-isle' ); ?>" />
-										<input type="hidden" name="post_type" value="product" />
-									</form>
-								</div>
-							</div>
 
-							<?php if ( function_exists( 'WC' ) ) : ?>
-								<div class="navbar-cart-inner">
-									<a href="<?php echo esc_url( wc_get_cart_url() ); ?>" title="<?php esc_attr_e( 'View your shopping cart', 'shop-isle' ); ?>" class="cart-contents">
-										<span class="icon-basket"></span>
-										<span class="cart-item-number"><?php echo esc_html( trim( WC()->cart->get_cart_contents_count() ) ); ?></span>
-									</a>
-									<?php apply_filters( 'shop_isle_cart_icon', '' ); ?>
-								</div>
-							<?php endif; ?>
+        <?php if ( class_exists( 'WooCommerce', false ) ) : ?>
 
-						</div>
-					<?php endif; ?>
+            <div class="header__item">
 
-				</div>
-			</div>
+                <form role="search" method="get" class="main-search" action="<?php echo esc_url( home_url( '/' ) ); ?>">
+                    <input type="search" class="main-search__input" placeholder="Я ищу..." value="<?php echo get_search_query(); ?>" name="s" title="<?php echo esc_attr_x( 'Search for:', 'label', 'shop-isle' ); ?>" />
+                    <input type="submit" value="" class="main-search__submit-input" />
+                    <input type="hidden" name="post_type" value="product" />
+                </form>
 
-		</nav>
+            </div>
+
+
+        <?php endif; ?>
+
+            </div>
+        </div>
+
 		<!-- Navigation end -->
 		<?php
 	}

@@ -1042,7 +1042,7 @@ function wp_get_attachment_image( $attachment_id, $size = 'thumbnail', $icon = f
 
 		$default_attr = array(
 			'src'   => $src,
-			'class' => "attachment-$size_class size-$size_class",
+			'class' => "card__img attachment-$size_class size-$size_class",
 			'alt'   => trim( strip_tags( get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ) ),
 		);
 

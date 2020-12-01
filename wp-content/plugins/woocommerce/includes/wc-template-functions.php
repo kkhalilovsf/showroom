@@ -479,7 +479,7 @@ function wc_get_loop_class() {
 function wc_get_product_cat_class( $class = '', $category = null ) {
 	$classes   = is_array( $class ) ? $class : array_map( 'trim', explode( ' ', $class ) );
 	$classes[] = 'product-category';
-	$classes[] = 'product';
+	$classes[] = 'product stack__item card animate card--hovered card--change-bg';
 	$classes[] = wc_get_loop_class();
 	$classes   = apply_filters( 'product_cat_class', $classes, $class, $category );
 
@@ -1156,7 +1156,7 @@ if ( ! function_exists( 'woocommerce_template_loop_product_title' ) ) {
 	 * Show the product title in the product loop. By default this is an H2.
 	 */
 	function woocommerce_template_loop_product_title() {
-		echo '<h2 class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'woocommerce-loop-product__title' ) ) . '">' . get_the_title() . '</h2>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+		echo '<div class="' . esc_attr( apply_filters( 'woocommerce_product_loop_title_classes', 'card__title product--title' ) ) . '">' . get_the_title() . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 	}
 }
 if ( ! function_exists( 'woocommerce_template_loop_category_title' ) ) {
@@ -1168,16 +1168,30 @@ if ( ! function_exists( 'woocommerce_template_loop_category_title' ) ) {
 	 */
 	function woocommerce_template_loop_category_title( $category ) {
 		?>
-		<h2 class="woocommerce-loop-category__title">
+		<div class="card__title">
 			<?php
 			echo esc_html( $category->name );
 
-			if ( $category->count > 0 ) {
-				// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-				echo apply_filters( 'woocommerce_subcategory_count_html', ' <mark class="count">(' . esc_html( $category->count ) . ')</mark>', $category );
-			}
+
 			?>
-		</h2>
+		</div>
+		<div class="card__content tile-info">
+                    <ul class="list-unstyled">
+                      <li>
+                        <span class="tile-info__subtitle">Страна:</span>
+                        <span class="tile-info__value">Испания</span>
+                      </li>
+                      <li>
+                      <?php
+                      if ( $category->count > 0 ) {
+                            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+                            echo apply_filters( 'woocommerce_subcategory_count_html', '<span class="tile-info__subtitle">Коллекция:</span><span class="tile-info__value count"> ' . esc_html( $category->count ) . '</span> ', $category );
+                       }
+                       ?>
+
+                      </li>
+                    </ul>
+                 </div>
 		<?php
 	}
 }
@@ -1396,12 +1410,12 @@ if ( ! function_exists( 'woocommerce_catalog_ordering' ) ) {
 		$catalog_orderby_options = apply_filters(
 			'woocommerce_catalog_orderby',
 			array(
-				'menu_order' => __( 'Default sorting', 'woocommerce' ),
-				'popularity' => __( 'Sort by popularity', 'woocommerce' ),
+				'menu_order' => __( 'Без сортировки', 'woocommerce' ),
+				/*'popularity' => __( 'Sort by popularity', 'woocommerce' ),
 				'rating'     => __( 'Sort by average rating', 'woocommerce' ),
-				'date'       => __( 'Sort by latest', 'woocommerce' ),
-				'price'      => __( 'Sort by price: low to high', 'woocommerce' ),
-				'price-desc' => __( 'Sort by price: high to low', 'woocommerce' ),
+				'date'       => __( 'Sort by latest', 'woocommerce' ),*/
+				'price'      => __( 'По возрастанию цены', 'woocommerce' ),
+				'price-desc' => __( 'По убыванию цены', 'woocommerce' ),
 			)
 		);
 
@@ -2217,11 +2231,11 @@ if ( ! function_exists( 'woocommerce_breadcrumb' ) ) {
 				'woocommerce_breadcrumb_defaults',
 				array(
 					'delimiter'   => '&nbsp;&#47;&nbsp;',
-					'wrap_before' => '<nav class="woocommerce-breadcrumb">',
+					'wrap_before' => '<nav class="breadcrumb">',
 					'wrap_after'  => '</nav>',
 					'before'      => '',
 					'after'       => '',
-					'home'        => _x( 'Home', 'breadcrumb', 'woocommerce' ),
+					'home'        => _x( 'Главная', 'breadcrumb', 'woocommerce' ),
 				)
 			)
 		);
@@ -2575,12 +2589,31 @@ if ( ! function_exists( 'woocommerce_subcategory_thumbnail' ) ) {
 
 			// Add responsive image markup if available.
 			if ( $image_srcset && $image_sizes ) {
-				echo '<img src="' . esc_url( $image ) . '" alt="' . esc_attr( $category->name ) . '" width="' . esc_attr( $dimensions['width'] ) . '" height="' . esc_attr( $dimensions['height'] ) . '" srcset="' . esc_attr( $image_srcset ) . '" sizes="' . esc_attr( $image_sizes ) . '" />';
+				echo '<img class="card__img img-default" src="' . esc_url( $image ) . '" alt="' . esc_attr( $category->name ) . '" srcset="' . esc_attr( $image_srcset ) . '" sizes="' . esc_attr( $image_sizes ) . '" />';
 			} else {
-				echo '<img src="' . esc_url( $image ) . '" alt="' . esc_attr( $category->name ) . '" width="' . esc_attr( $dimensions['width'] ) . '" height="' . esc_attr( $dimensions['height'] ) . '" />';
+				echo '<img class="card__img" src="' . esc_url( $image ) . '" alt="' . esc_attr( $category->name ) . '" width="' . esc_attr( $dimensions['width'] ) . '" height="' . esc_attr( $dimensions['height'] ) . '" />';
 			}
 		}
 	}
+}
+
+
+
+add_filter( 'woocommerce_single_product_carousel_options', 'ud_update_woo_flexslider_options' );
+
+function ud_update_woo_flexslider_options( $options ) {
+
+  $options['directionNav'] = true;
+
+  return $options;
+}
+add_filter( 'woocommerce_pagination_args', 	'rocket_woo_pagination' );
+function rocket_woo_pagination( $args ) {
+
+    $args['prev_text'] = '<i class="fas fa-chevron-left"></i>';
+    $args['next_text'] = '<i class="fas fa-chevron-right"></i>';
+
+    return $args;
 }
 
 if ( ! function_exists( 'woocommerce_order_details_table' ) ) {

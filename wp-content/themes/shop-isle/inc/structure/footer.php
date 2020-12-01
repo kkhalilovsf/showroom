@@ -73,38 +73,80 @@ if ( ! function_exists( 'shop_isle_footer_copyright_and_socials' ) ) {
 
 		?>
 		<!-- Footer start -->
-		<footer class="footer bg-dark">
-			<!-- Divider -->
-			<hr class="divider-d">
-			<!-- Divider -->
-			<div class="container">
+		 <footer class="footer">
+              <div class="wrapper">
+                <div class="footer__content">
+                  <div class="footer__item">
+                    <?php
 
-				<div class="row">
+                    echo '<div class="shop_isle_header_title"><div class="shop-isle-header-title-inner">';
 
-					<?php
-					/* Copyright */
-					$shop_isle_copyright = apply_filters( 'shop_isle_footer_copyright_filter', get_theme_mod( 'shop_isle_copyright' ) );
-					$shop_isle_copyright = ! empty( $shop_isle_copyright ) ? $shop_isle_copyright : '';
-					echo '<div class="col-sm-6">';
-					if ( ! empty( $shop_isle_copyright ) || is_customize_preview() ) :
-						echo '<p class="copyright font-alt">' . $shop_isle_copyright . '</p>';
-						endif;
+                    // Logo selected
+                    the_custom_logo();
 
-						$shop_isle_site_info_hide = apply_filters( 'shop_isle_footer_socials_filter', get_theme_mod( 'shop_isle_site_info_hide' ) );
-					if ( isset( $shop_isle_site_info_hide ) && $shop_isle_site_info_hide != 1 ) {
-						echo apply_filters( 'shop_isle_site_info', '<p class="shop-isle-poweredby-box"><a class="shop-isle-poweredby" href="http://themeisle.com/themes/shop-isle/" rel="nofollow">ShopIsle </a>' . __( 'powered by', 'shop-isle' ) . '<a class="shop-isle-poweredby" href="http://wordpress.org/" rel="nofollow"> WordPress</a></p>' );
-					}
-					echo '</div>';
+                    echo '</div></div>';
+                    ?>
 
-					/* Socials icons */
-					echo '<div class="col-sm-6">';
-					echo shop_isle_footer_display_socials();
-					echo '</div>';
-					?>
-				</div><!-- .row -->
+                  </div>
+                  <div class="footer__item">
+                    <div class="info">
+                      <div class="info__contacts">
+                        <div class="info__contacts-item">
+                          <div class="subtitle info__subtitle">Опт:</div>
+                          <a href="tel:89787706417" class="info__tel">8 (978) 770-6417</a>
+                        </div>
+                      </div>
+                      <div class="info__address">
+                        <p>г. Симферополь, ул. Данилова, 43</p>
+                      </div>
+                      <div class="info__mail">
+                        <a href="mailto:info@kafelmarket.com">info@kafelmarket.com</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer__item">
+                    <div class="info">
+                      <div class="info__contacts">
+                        <div class="info__contacts-item">
+                          <div class="subtitle info__subtitle" for="retail">Розница:</div>
+                          <a href="tel:89797705923" id="retail" class="info__tel">8 (979) 770-5923</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="footer__item">
+                      <div class="info">
+                          <div class="info__social">
+                              <a href="https://www.instagram.com/kafel_market_showroom/" target="_blank" class="info__social-link link-inverse"><i class="fab fa-instagram"></i></a>
+                              <a href="https://vk.com/kafel_market" target="_blank" class="info__social-link link-inverse"><i class="fab fa-vk"></i></a>
+                          </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </footer>
 
-			</div>
-		</footer>
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">О нас</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true"><i class="fas fa-times"></i></span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <video id="about-us-video" class="video-js vjs-default-skin" controls
+                    preload="auto" width="100%" height="" poster="">
+                    <source src="./wp-content/uploads/videos/about-us.mp4" type='video/mp4'>
+                    </video>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/gsap.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.5.1/ScrollTrigger.min.js"></script>
 		<!-- Footer end -->
 		<?php
 	}
@@ -135,3 +177,4 @@ if ( ! function_exists( 'shop_isle_footer_wrap_close' ) ) {
 		echo '</div><!-- .bottom-page-wrap -->';
 	}
 }
+

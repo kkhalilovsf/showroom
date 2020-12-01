@@ -55,8 +55,8 @@ if ( ! function_exists( 'shop_isle_shop_page_wrapper' ) ) {
 	 */
 	function shop_isle_shop_page_wrapper() {
 		?>
-		<section class="module-small module-small-shop">
-				<div class="container">
+		<section class="|:D|">
+				<div class="wrapper">
 
 				<?php
 				if ( is_shop() || is_product_tag() || is_product_category() ) :
@@ -86,8 +86,8 @@ if ( ! function_exists( 'shop_isle_shop_page_wrapper' ) ) {
  * @return  void
  */
 function shop_isle_product_page_wrapper() {
-	echo '<section class="module module-super-small">
-			<div class="container product-main-content">';
+	echo '<section class="test-123123123123123">
+			<div class="wrapper product-main-content">';
 }
 
 if ( ! function_exists( 'shop_isle_product_page_wrapper_end' ) ) {
@@ -287,9 +287,9 @@ function shop_isle_header_shop_page( $page_title ) {
 
 	$shop_isle_header_image = get_header_image();
 	if ( ! empty( $thumb_tmp ) ) {
-		$shop_isle_title = '<section class="' . ( is_woocommerce() ? 'woocommerce-page-title ' : '' ) . 'page-header-module module bg-dark" data-background="' . $thumb_tmp . '">';
+		$shop_isle_title = '<section class="' . ( is_woocommerce() ? 'woocommerce-page-title ' : '' ) . 'banner page-header-module module bg-dark" data-background="' . $thumb_tmp . '">';
 	} elseif ( ! empty( $shop_isle_header_image ) ) {
-		$shop_isle_title = '<section class="' . ( is_woocommerce() ? 'woocommerce-page-title ' : '' ) . 'page-header-module module bg-dark" data-background="' . $shop_isle_header_image . '">';
+		$shop_isle_title = '<section class="' . ( is_woocommerce() ? 'woocommerce-page-title ' : '' ) . 'banner page-header-module module bg-dark" data-background="' . $shop_isle_header_image . '">';
 	} else {
 		$shop_isle_title = '<section class="page-header-module module bg-dark">';
 	}
@@ -298,11 +298,19 @@ function shop_isle_header_shop_page( $page_title ) {
 
 			$shop_isle_title .= '<div class="row">';
 
-				$shop_isle_title .= '<div class="col-sm-6 col-sm-offset-3">';
+				$shop_isle_title .= '<div class="col-12">';
 
 	if ( ! empty( $page_title ) ) :
 
-		$shop_isle_title .= '<h1 class="module-title font-alt">' . $page_title . '</h1>';
+		$shop_isle_title .= '
+		<div class="banner__content">
+		    <h1 class="banner__title title title--lg title--white">ИСПАНСКАЯ ПЛИТКА</h1>
+            <p class="banner__text">
+              Только премиум товары высокого качества. Более 20 элитный европеский брендов
+              керамической экспозиции. Более 15 лет работы на рынке Крыма.
+            </p>
+		</div>
+		';
 
 					endif;
 
@@ -714,7 +722,17 @@ if ( ! function_exists( 'shop_isle_woocommerce_product_archive_description' ) ) 
 function shop_isle_woocommerce_breadcrumb() {
 	if ( function_exists( 'woocommerce_breadcrumb' ) ) {
 		if ( is_front_page() ) {
-			echo '<nav class="woocommerce-breadcrumb"><a href="' . esc_url( home_url( '/' ) ) . '">Home</a></nav>';
+			echo '
+			<nav class="breadcrumb">
+			    <a class="breadcrumbs" href="' . esc_url( home_url( '/' ) ) . '">Главная</a>
+			    <div class="section__header">
+			        <div class="title title--lg animate title--300">ИСПАНСКАЯ ПЛИТКА</div>
+                    <button type="button" class="btn  btn--icon" data-toggle="modal" data-target="#exampleModalCenter">
+                          <span class="btn__icon"><i class="fas fa-video"></i></span> О нас
+                    </button>
+			    </div>
+			</nav>
+			';
 		} else {
 			woocommerce_breadcrumb();
 		}
@@ -732,7 +750,22 @@ function shop_isle_outofstock_notify_on_archives() {
 		}
 	}
 }
+add_filter('woocommerce_single_product_image_thumbnail_html', 'remove_featured_image', 10, 2);
+function remove_featured_image($html, $attachment_id ) {
+    global $post, $product;
 
+    $featured_image = get_post_thumbnail_id( $post->ID );
+
+    if ( $attachment_id == $featured_image )
+        $html = '';
+
+    return $html;
+}
+
+add_action( 'wp', 'ts_remove_zoom_lightbox_gallery_support', 99 );
+function ts_remove_zoom_lightbox_gallery_support() {
+   remove_theme_support( 'wc-product-gallery-zoom' );
+}
 /**
  * Add compatibility with WooCommerce Product Images customizer controls.
  */
@@ -761,3 +794,33 @@ function shop_isle_set_woo_image_sizes() {
 	update_option( 'shop_isle_update_woocommerce_customizer_controls', true );
 }
 add_action( 'after_setup_theme', 'shop_isle_set_woo_image_sizes', 10 );
+// Change the Number of WooCommerce Products Displayed Per Page
+add_filter( 'loop_shop_per_page', 'lw_loop_shop_per_page', 30 );
+
+function lw_loop_shop_per_page( $products ) {
+ $products = 16;
+ return $products;
+}
+
+/*test*/
+
+add_action('bcn_after_fill', 'bcnext_remove_current_item');
+/**
+ * We're going to pop off the paged breadcrumb and add in our own thing
+ *
+ * @param bcn_breadcrumb_trail $trail the breadcrumb_trail object after it has been filled
+ */
+function bcnext_remove_current_item($trail)
+{
+	//Check to ensure the breadcrumb we're going to play with exists in the trail
+	if(isset($trail->breadcrumbs[0]) && $trail->breadcrumbs[0] instanceof bcn_breadcrumb)
+	{
+		$types = $trail->breadcrumbs[0]->get_types();
+		//Make sure we have a type and it is a current-item
+		if(is_array($types) && in_array('current-item', $types))
+		{
+			//Shift the current item off the front
+			array_shift($trail->breadcrumbs);
+		}
+	}
+}

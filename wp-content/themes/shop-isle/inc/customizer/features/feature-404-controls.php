@@ -98,7 +98,7 @@ function shop_isle_404_page_customize_register( $wp_customize ) {
 		'shop_isle_404_label',
 		array(
 			'sanitize_callback' => 'shop_isle_sanitize_text',
-			'default'           => __( 'Back to home page', 'shop-isle' ),
+			'default'           => __( 'Вернуться на главную', 'shop-isle' ),
 			'transport'         => 'postMessage',
 		)
 	);

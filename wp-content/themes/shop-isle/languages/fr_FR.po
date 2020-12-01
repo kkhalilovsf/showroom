@@ -23,7 +23,7 @@ msgid "Error 404"
 msgstr "Erreur 404"
 
 #: 404.php:41
-msgid "Back to home page"
+msgid "Вернуться на главную"
 msgstr "Retour à la page d'accueil"
 
 #: archive.php:94 home.php:111 index.php:123

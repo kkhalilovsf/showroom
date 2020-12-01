@@ -19,4 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<ul class="products columns-<?php echo esc_attr( wc_get_loop_prop( 'columns' ) ); ?>">
+
+
+<?php if ( ! is_product_category() ) { ?>
+    <div class="product-slider mb-30 animate">
+       <?php echo do_shortcode('[smartslider3 slider="2"]');?>
+    </div>
+	<ul class="products stack stack--horizontal stack-desc-3">
+<?php } else {?>
+	<ul class="products stack stack--horizontal stack-desc-4">
+<?php } ?>

@@ -56,7 +56,7 @@ registerBlockType( 'woocommerce/product-search', {
 		 */
 		placeholder: {
 			type: 'string',
-			default: __( 'Search products…', 'woocommerce' ),
+			default: __( 'Я ищу…', 'woocommerce' ),
 			source: 'attribute',
 			selector: 'input.wc-block-product-search__field',
 			attribute: 'placeholder',

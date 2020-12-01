@@ -254,7 +254,7 @@ class ProductByCategoryBlock extends Component {
 								className="wc-block-products-grid wc-block-products-category"
 							>
 								{ __(
-									'No products were found that matched your selection.',
+									'Товаров, соответствующих вашему запросу, не обнаружено.',
 									'woocommerce'
 								) }
 							</Placeholder>
